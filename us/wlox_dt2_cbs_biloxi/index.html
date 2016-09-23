@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="sieutv"><meta name="keywords" content="sieutv"><meta name="author" content="binhbat"><script src="/livetv/myscript.js"></script><link href="//getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"><link href="/livetv/mystyle.css" rel="stylesheet"><link href="/livetv/favicon.png" rel="icon"><title>wlox_dt2_cbs_biloxi</title></head><body><div id="main" class="container-fluid bg-info"><div class="row"><div class="col-md-9 col-lg-8"><div class="row"><video poster="/assets/img/sieutv16x9.jpg" data-setup="{}" id="player0" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls="" preload="auto"><source src="/0data/us/wlox_dt2_cbs_biloxi.m3u8" type="application/x-mpegurl" /></video>
+</div><div class="row bg-success"><div class="btn-group pull-right"><a class="btn btn-warning" href="/livetv/us/wlox_abc_biloxi/"><i class="glyphicon glyphicon-backward"></i></a><button type="button" class="btn btn-warning" onclick="location.reload();"><i class="glyphicon glyphicon-refresh"></i></button><a class="btn btn-warning" href="/livetv/us/wlpb_pbs27_baton_rouge/"><i class="glyphicon glyphicon-forward"></i></a></div><a href="/livetv" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a><a href="/livetv/us" class="btn btn-success"><img src="/assets/flags/us.jpg"/></a><b>wlox_dt2_cbs_biloxi</b></div>
+<script>
+function slugify(text){return text.toString().toLowerCase().trim().replace(/&/g, '-and-').replace(/[\s\W-]+/g, '-').replace(/[^a-zA-Z0-9-_]+/g,'');}
+$(function() {
+  var ref = new Firebase("https://sieutv-comment.firebaseio.com/"),
+    postRef = ref.child(slugify(window.location.pathname));
+
+    postRef.on("child_added", function(snapshot) {
+      var newPost = snapshot.val();
+      $(".comments").prepend('<div class="comment">' +
+        '<div class="row"><img src="http://www.gravatar.com/avatar/' + newPost.md5Email + '?s=100&d=retro" class="pull-left"/>' + 
+        '<h3>' + newPost.name + '</h3> ' +
+        '<span class="date">' + moment(newPost.postedAt).fromNow() + '</span><p>' + newPost.message  + '</p></div>');
+    });
+
+    $("#comment").submit(function() {
+      postRef.push().set({
+        name: $("#name").val(),
+        md5Email: md5($("#email").val()),
+		message: $("#message").val(),
+        postedAt: Firebase.ServerValue.TIMESTAMP
+      });
+
+      $("input[type=text], textarea").val("");
+      return false;
+    });
+});
+</script>
+<div class="comments">Comment</div>
+<form id="comment">
+<input id="name" type="text" class="form-control" placeholder="Name">
+<input id="email" type="text" class="form-control" placeholder="Email">
+<textarea id="message" class="form-control" rows="3" placeholder="Comment"></textarea>
+<input type="submit" value="Submit">
+</form>
+<div class="hidden-sm"><div class="row text-center"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1736135093326901" data-ad-slot="1354883673" data-ad-format="auto"></ins></div></div></div><div class="hidden-sm col-md-3 col-lg-4"><div class="row text-center"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1736135093326901" data-ad-slot="1354883673" data-ad-format="auto"></ins></div></div></div></div><footer><hr><hr></footer><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments);},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-84530683-1', 'auto');ga('send', 'pageview');</script>
+</body></html>
